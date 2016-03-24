@@ -41,7 +41,8 @@ public class AlbumsFragment extends Fragment{
                 photosFragment.setArguments(bundle);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 
-                transaction.add(R.id.fragment_container, photosFragment);
+                transaction.replace(R.id.fragment_container, photosFragment);
+                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });

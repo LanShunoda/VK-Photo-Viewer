@@ -48,7 +48,7 @@ public class PhotosAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.photo_item, parent, false);
         }
 
-        new DownloadImageTask(view).execute(photos.get(position).photo_75);
+        new DownloadImageTask(view).execute(photos.get(position).photo_130);
 
         return view;
     }

@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.fragment_container, albumsFragment);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 

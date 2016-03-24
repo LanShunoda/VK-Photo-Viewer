@@ -3,9 +3,11 @@ package com.plorial.vkphotoviewer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.vk.sdk.api.VKParameters;
@@ -51,6 +53,21 @@ public class PhotosFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                PhotoFragment photoFragment = new PhotoFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("PHOTO",photos.get(position).photo_807);
+                photoFragment.setArguments(bundle);
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.fragment_container, photoFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
         gridView.setAdapter(new PhotosAdapter(getContext(),photos));
