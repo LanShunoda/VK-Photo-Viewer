@@ -3,7 +3,9 @@ package com.plorial.vkphotoviewer;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,10 +14,16 @@ import java.io.InputStream;
  * Created by plorial on 3/24/16.
  */
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-    ImageView bmImage;
+    View view;
 
-    public DownloadImageTask(ImageView bmImage) {
-        this.bmImage = bmImage;
+    public DownloadImageTask(View view) {
+        this.view = view;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+
     }
 
     protected Bitmap doInBackground(String... url) {
@@ -31,7 +39,10 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected void onPostExecute(Bitmap result) {
-        bmImage.setImageBitmap(result);
+        ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
+        imageView.setImageBitmap(result);
+        ProgressBar bar = (ProgressBar) view.findViewById(R.id.progressBar);
+        bar.setVisibility(View.GONE);
     }
 }
 
