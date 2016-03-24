@@ -20,12 +20,6 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         this.view = view;
     }
 
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-
-    }
-
     protected Bitmap doInBackground(String... url) {
         String urldisplay = url[0];
         Bitmap mIcon11 = null;

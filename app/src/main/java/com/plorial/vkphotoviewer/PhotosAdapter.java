@@ -5,33 +5,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
+
+import com.vk.sdk.api.model.VKApiPhoto;
 
 import java.util.List;
 
 /**
  * Created by plorial on 3/24/16.
  */
-public class AlbumAdapter extends BaseAdapter {
+public class PhotosAdapter extends BaseAdapter {
 
     Context context;
     LayoutInflater inflater;
-    List<Album> albums;
+    List<VKApiPhoto> photos;
 
-    public AlbumAdapter(Context context, List<Album> albums) {
+    public PhotosAdapter(Context context, List<VKApiPhoto> photos) {
         this.context = context;
-        this.albums = albums;
+        this.photos = photos;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return albums.size();
+        return photos.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return albums.get(position);
+        return photos.get(position);
     }
 
     @Override
@@ -44,12 +45,10 @@ public class AlbumAdapter extends BaseAdapter {
 
         View view = convertView;
         if (view == null) {
-            view = inflater.inflate(R.layout.album_item, parent, false);
+            view = inflater.inflate(R.layout.photo_item, parent, false);
         }
-        TextView tvAlbumTitle = (TextView) view.findViewById(R.id.tvAlbumTitle);
-        tvAlbumTitle.setText(albums.get(position).getTitle());
 
-        new DownloadImageTask(view).execute(albums.get(position).getThumbSrc());
+        new DownloadImageTask(view).execute(photos.get(position).photo_75);
 
         return view;
     }
