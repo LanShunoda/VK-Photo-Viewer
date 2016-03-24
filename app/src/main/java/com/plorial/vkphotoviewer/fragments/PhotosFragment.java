@@ -1,4 +1,4 @@
-package com.plorial.vkphotoviewer;
+package com.plorial.vkphotoviewer.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.plorial.vkphotoviewer.adapters.PhotosAdapter;
+import com.plorial.vkphotoviewer.R;
 import com.vk.sdk.api.VKParameters;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
@@ -27,6 +29,8 @@ import java.util.List;
  */
 public class PhotosFragment extends Fragment {
 
+    public static final String PHOTO = "PHOTO";
+
     private List<VKApiPhoto> photos;
 
     @Nullable
@@ -35,7 +39,7 @@ public class PhotosFragment extends Fragment {
         View view = inflater.inflate(R.layout.preview_fragment,container,false);
 
         GridView gridView = (GridView) view.findViewById(R.id.gridView);
-        VKRequest albumPhotosRequest = new VKRequest("photos.get", VKParameters.from("album_id",  getArguments().getInt("ALBUM_ID")));
+        VKRequest albumPhotosRequest = new VKRequest("photos.get", VKParameters.from("album_id", getArguments().getInt(AlbumsFragment.ALBUM_ID)));
         albumPhotosRequest.executeSyncWithListener(new VKRequest.VKRequestListener() {
             @Override
             public void onComplete(VKResponse response) {
@@ -61,7 +65,7 @@ public class PhotosFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PhotoFragment photoFragment = new PhotoFragment();
                 Bundle bundle = new Bundle();
-                bundle.putString("PHOTO",photos.get(position).photo_807);
+                bundle.putString(PHOTO, photos.get(position).photo_807);
                 photoFragment.setArguments(bundle);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 

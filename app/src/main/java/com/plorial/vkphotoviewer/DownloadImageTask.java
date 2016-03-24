@@ -14,7 +14,8 @@ import java.io.InputStream;
  * Created by plorial on 3/24/16.
  */
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-    View view;
+
+    private View view;
 
     public DownloadImageTask(View view) {
         this.view = view;

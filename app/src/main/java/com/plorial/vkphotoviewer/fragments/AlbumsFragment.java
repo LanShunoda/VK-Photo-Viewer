@@ -1,4 +1,4 @@
-package com.plorial.vkphotoviewer;
+package com.plorial.vkphotoviewer.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.plorial.vkphotoviewer.Album;
+import com.plorial.vkphotoviewer.adapters.AlbumAdapter;
+import com.plorial.vkphotoviewer.AlbumsRequestListener;
+import com.plorial.vkphotoviewer.R;
 import com.vk.sdk.api.VKParameters;
 import com.vk.sdk.api.VKRequest;
 
@@ -20,7 +24,9 @@ import java.util.List;
  */
 public class AlbumsFragment extends Fragment{
 
-    List<Album> albums;
+
+    public static final String ALBUM_ID = "ALBUM_ID";
+    private List<Album> albums;
 
     @Nullable
     @Override
@@ -37,7 +43,7 @@ public class AlbumsFragment extends Fragment{
             public void onItemClick(final AdapterView<?> parent, View view, int position, long id) {
                 PhotosFragment photosFragment = new PhotosFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt("ALBUM_ID",albums.get(position).getId());
+                bundle.putInt(ALBUM_ID,albums.get(position).getId());
                 photosFragment.setArguments(bundle);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 
